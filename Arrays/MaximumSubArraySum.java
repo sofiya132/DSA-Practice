@@ -6,18 +6,20 @@ class MaximumSubArraySum {
         int maxElement = a[0];
         for(int i=0;i<a.length;i++){
             cursum = cursum +a[i];
+            //kadane's approach
             if(cursum<0){
                 cursum = 0;
             }
              maxsum = Math.max(maxsum,cursum);
               maxElement = Math.max(maxElement,a[i]);
         }
-      if(maxsum==0){
+
+      if(maxsum==0){//if all the elements of arrray are negative
           maxsum = maxElement;
       }
       return maxsum;  
     }
-    
+     
     public static void main(String args[]){
         Scanner s = new Scanner(System.in);
         int n = s.nextInt();
@@ -28,3 +30,4 @@ class MaximumSubArraySum {
         System.out.print(maxsubarrsum(a));
     }
 }
+
