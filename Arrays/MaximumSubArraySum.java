@@ -14,7 +14,8 @@ class MaximumSubArraySum {
               maxElement = Math.max(maxElement,a[i]);
         }
 
-      if(maxsum==0){//if all the elements of arrray are negative
+      if(maxsum==0){
+        //if all the elements of arrray are negative
           maxsum = maxElement;
       }
       return maxsum;  

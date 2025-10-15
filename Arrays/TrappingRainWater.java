@@ -1,4 +1,4 @@
-public class TrappingRainWater{
+public class TrappingRainWater{// time complexity = o(n)
     public static int trappedrainwater(int height[]){
         int n = height.length;
         int width = 1;//width of each bar
@@ -29,4 +29,4 @@ public class TrappingRainWater{
         System.out.println(trappedrainwater(height));
 
     }
-}
+} 
