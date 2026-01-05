@@ -1,4 +1,4 @@
-// LeetCode 81: Search in Rotated Sorted Array 
+// LeetCode 33: Search in Rotated Sorted Array 
 class Solution {
     public int search(int[] nums, int target) {
       int n = nums.length;
