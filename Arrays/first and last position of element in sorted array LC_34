@@ -1,4 +1,7 @@
-//using binary search two times one is for first occurrence and another for last occurence
+// LeetCode 34: Find First and Last Position of Element in Sorted Array
+// Approach: Binary Search (First & Last Occurrence)
+// Time: O(log n)
+
 class Solution {
     public int[] searchRange(int[] nums, int target) {
         int first = findFirst(nums, target);
