@@ -1,0 +1,33 @@
+/*
+Problem: LC 1234 - Problem Name
+
+Time Complexity: O(n log n)
+Space Complexity: O(n)
+*/
+class Solution {
+    public long gcdSum(int[] nums) {
+        int n = nums.length;
+        long sum = 0;
+        int prefixGcd[] = new int[n];
+        int mx = nums[0];
+        for (int i = 0; i < n; i++) {
+            mx = Math.max(mx, nums[i]);
+            prefixGcd[i] = gcd(nums[i], mx);
+        }
+        Arrays.sort(prefixGcd);
+        for (int i = 0, k = n - 1; i < (n / 2); i++) {
+            sum += gcd(prefixGcd[i], prefixGcd[k]);
+            k--;
+        }
+        return sum;
+    }
+
+    public int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+}
