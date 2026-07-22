@@ -1,3 +1,13 @@
+Intuition
+Reverse the string by swapping the characters from both ends and moving toward the center.
+
+Approach
+Use two pointers: one at the beginning and one at the end of the array. Swap their characters, then move the pointers inward until they meet.
+
+Complexity
+Time complexity: O(n)
+Space complexity: O(1)
+Code
 class Solution {
     public void reverseString(char[] s) {
         int i = 0;
@@ -7,7 +17,6 @@ class Solution {
             char temp = s[j];
             s[j] = s[i];
             s[i] = temp;
-
             i++;
             j--;
         }
