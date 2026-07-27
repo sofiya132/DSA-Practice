@@ -1,0 +1,89 @@
+Approach 1: Find Maximum First, Then Find Second Maximum
+Idea
+Traverse the array once to find the maximum element and its index.
+Traverse again to find the largest element excluding the maximum's index.
+Return (max - 1) * (secondMax - 1).
+Code
+class Solution {
+    public int maxProduct(int[] nums) {
+        int max = 0, secondMax = 0;
+        int maxIndex = -1;
+
+        // Find maximum element and its index
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
+                maxIndex = i;
+            }
+        }
+
+        // Find second maximum excluding maxIndex
+        for (int i = 0; i < nums.length; i++) {
+            if (i != maxIndex && nums[i] > secondMax) {
+                secondMax = nums[i];
+            }
+        }
+
+        return (max - 1) * (secondMax - 1);
+    }
+}
+Time Complexity
+O(n) + O(n) = O(n)
+Space Complexity
+O(1)
+
+Approach 2: Single Pass (Optimal)
+Idea
+Maintain two variables:
+max1 → largest element
+max2 → second largest element
+Update both in a single traversal.
+Code
+class Solution {
+    public int maxProduct(int[] nums) {
+        int max1 = 0;
+        int max2 = 0;
+
+        for (int num : nums) {
+            if (num > max1) {
+                max2 = max1;
+                max1 = num;
+            } else if (num > max2) {
+                max2 = num;
+            }
+        }
+
+        return (max1 - 1) * (max2 - 1);
+    }
+}
+Time Complexity
+O(n)
+Space Complexity
+O(1)
+
+Approach 3: Sorting
+Idea
+Sort the array.
+The last two elements are the largest.
+Compute the required product.
+Code
+import java.util.Arrays;
+
+class Solution {
+    public int maxProduct(int[] nums) {
+        Arrays.sort(nums);
+        return (nums[nums.length - 1] - 1) * (nums[nums.length - 2] - 1);
+    }
+}
+Time Complexity
+O(n log n)
+Space Complexity
+O(log n) (sorting stack space for Java's Dual-Pivot Quicksort on primitive arrays)
+
+Complexity Comparison
+
+| Approach                  | Time           | Space        |
+| ------------------------- | -------------- | ------------ |
+| Find Max, Then Second Max | **O(n)**       | **O(1)**     |
+| Single Pass (Optimal)     | **O(n)**       | **O(1)**     |
+| Sorting                   | **O(n log n)** | **O(log n)** |
