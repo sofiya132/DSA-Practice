@@ -1,0 +1,26 @@
+java
+
+class Solution {
+    public int hammingWeight(int n) {
+        int count = 0;
+
+        while (n != 0) {
+            if ((n & 1) == 1) {
+                count++;
+            }
+            n = n >>> 1;
+        }
+
+        return count;
+    }
+}
+
+**Time:** `O(32)` → `O(1)`
+**Space:** `O(1)`
+
+### Why `>>>`?
+
+* `>>` = signed right shift → keeps the sign bit (`1` for negative numbers).
+* `>>>` = unsigned right shift → fills left bits with `0`.
+
+We use `>>>` because `n` is a **32-bit integer** and can be negative. With `>>>`, the bits are shifted out and `n` eventually becomes `0`.
