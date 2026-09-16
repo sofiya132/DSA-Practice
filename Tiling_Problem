@@ -1,0 +1,108 @@
+# TILING PROBLEM
+
+PROBLEM STATEMENT:
+Given a 2 x n floor and tiles of size 2 x 1, find the number of ways to completely tile the floor.
+
+A tile can be placed in two ways:
+
+1. Vertically - occupies 2 x 1
+2. Horizontally - two tiles are required to occupy a 2 x 2 space
+
+INTUITION:
+For the last part of the floor, we have two choices:
+
+1. VERTICAL PLACEMENT:
+   Place one tile vertically.
+   This occupies one column, leaving a 2 x (n-1) floor.
+
+   Number of ways = T(n-1)
+
+2. HORIZONTAL PLACEMENT:
+   Place two tiles horizontally.
+   These occupy two columns, leaving a 2 x (n-2) floor.
+
+   Number of ways = T(n-2)
+
+Therefore:
+
+T(n) = T(n-1) + T(n-2)
+
+BASE CASE:
+T(0) = 1
+T(1) = 1
+
+n = 0 -> There is 1 way to tile an empty floor.
+n = 1 -> There is only 1 way: place one tile vertically.
+
+EXAMPLE:
+For n = 5:
+
+T(5) = T(4) + T(3)
+= 5 + 3
+= 8
+
+Therefore, there are 8 ways to tile a 2 x 5 floor.
+
+## JAVA CODE:
+
+public class TilingProblem {
+
+```
+// Function to calculate the number of ways
+// to tile a 2 x n floor using 2 x 1 tiles
+public static int tilingProblem(int n) {
+
+    // Base case:
+    // If n is 0 or 1, there is only 1 way
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+
+    // Case 1: Place one tile vertically.
+    // Remaining floor = 2 x (n-1)
+    int fnm1 = tilingProblem(n - 1);
+
+    // Case 2: Place two tiles horizontally.
+    // Remaining floor = 2 x (n-2)
+    int fnm2 = tilingProblem(n - 2);
+
+    // Total ways = vertical ways + horizontal ways
+    int totalWays = fnm1 + fnm2;
+
+    return totalWays;
+}
+
+public static void main(String args[]) {
+
+    // Find the number of ways to tile a 2 x 5 floor
+    System.out.println(tilingProblem(5));
+}
+```
+
+}
+
+## OUTPUT:
+
+8
+
+TIME COMPLEXITY:
+O(2^n)
+
+SPACE COMPLEXITY:
+O(n)
+
+KEY CONCEPT:
+This problem follows the Recursion + Choice pattern.
+
+At every step:
+
+T(n)
+/  
+T(n-1)  T(n-2)
+Vertical Horizontal
+
+Recurrence Relation:
+
+T(n) = T(n-1) + T(n-2)
+
+This problem is similar to the Fibonacci sequence.

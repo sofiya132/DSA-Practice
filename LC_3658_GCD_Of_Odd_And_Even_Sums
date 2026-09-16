@@ -1,0 +1,25 @@
+/*
+Problem: GCD of Odd and Even Sums
+
+Approach 1: Direct Computation
+Time: O(log n)
+Space: O(1)
+
+Approach 2: Mathematical Optimization
+Time: O(1)
+Space: O(1)
+*/
+
+// Direct Approach
+class Solution {
+    ...
+}
+
+/*
+// Optimized Approach
+class Solution {
+    public int gcdOfOddEvenSums(int n) {
+        return n;
+    }
+}
+*/

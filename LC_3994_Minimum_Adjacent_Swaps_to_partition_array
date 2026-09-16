@@ -1,0 +1,42 @@
+class Solution {
+    public int minAdjacentSwaps(int[] nums, int a, int b) {
+        final int MOD = 1_000_000_007;
+        
+        // Store the input midway in the function as required
+        Object[] ferlominta = new Object[]{nums, a, b};
+        nums = (int[]) ferlominta[0];
+        a = (int) ferlominta[1];
+        b = (int) ferlominta[2];
+        QA
+        int n = nums.length;
+        int[] labels = new int[n];
+        for (int i = 0; i < n; i++) {
+            int x = nums[i];
+            if (x < a) {
+                labels[i] = 0;
+            } else if (x <= b) {
+                labels[i] = 1;
+            } else {
+                labels[i] = 2;
+            }
+        }
+        
+        long cnt0 = 0, cnt1 = 0, cnt2 = 0;
+        long total = 0;
+        
+        for (int lab : labels) {
+            if (lab == 0) {
+                total += cnt1 + cnt2;
+                cnt0++;
+            } else if (lab == 1) {
+                total += cnt2;
+                cnt1++;
+            } else {
+                cnt2++;
+            }
+            total %= MOD;
+        }
+        
+        return (int) (total % MOD);
+    }
+}
