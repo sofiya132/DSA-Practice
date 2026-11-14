@@ -1,0 +1,58 @@
+https://leetcode.com/problems/search-in-rotated-sorted-array/solutions/8612338/recursive-binary-search-beats-100-by-sof-7ft4
+
+Intuition
+The array is sorted but rotated at some pivot. So, the entire array is not sorted, but at least one half of the array will always be sorted.
+
+We can use Binary Search to efficiently find the target by identifying which half is sorted and checking whether the target lies within that half.
+
+Approach
+Find the middle index using si + (ei - si) / 2.
+If nums[mid] == target, return mid.
+Check whether the left half is sorted using nums[si] <= nums[mid].
+If the left half is sorted:
+Check whether the target lies between nums[si] and nums[mid].
+If yes, search in the left half.
+Otherwise, search in the right half.
+If the right half is sorted:
+Check whether the target lies between nums[mid] and nums[ei].
+If yes, search in the right half.
+Otherwise, search in the left half.
+Repeat recursively until the target is found or si > ei, in which case return -1.
+Complexity
+Time complexity: (O(log n)) — We eliminate half of the search space in every recursive call.
+Space complexity: (O(log n)) — Due to the recursive call stack.
+Code
+class Solution {
+    public int search(int[] nums, int target) {
+        return helper(nums, target, 0, nums.length - 1);
+    }
+
+    public int helper(int[] nums, int target, int si, int ei) {
+        if (si > ei) {
+            return -1;
+        }
+
+        int mid = si + (ei - si) / 2;
+
+        if (nums[mid] == target) {
+            return mid;
+        }
+
+        if (nums[si] <= nums[mid]) {
+            // Left half is sorted
+            if (nums[si] <= target && target <= nums[mid]) {
+                return helper(nums, target, si, mid - 1);
+            } else {
+                return helper(nums, target, mid + 1, ei);
+            }
+        } else {
+            // Right half is sorted
+            if (nums[mid] <= target && target <= nums[ei]) {
+                return helper(nums, target, mid + 1, ei);
+            } else {
+                return helper(nums, target, si, mid - 1);
+            }
+        }
+    }
+}
+ 
