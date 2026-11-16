@@ -1,0 +1,35 @@
+https://leetcode.com/problems/subsets/solutions/8615102/simplest-and-easiest-java-solution-backt-sxlb
+
+Intuition
+For every element, we have two choices: either include it in the subset or exclude it.
+We can use recursion to explore both choices and generate all possible subsets.
+Approach
+Use backtracking to generate subsets.
+At each index, first include the current element and make a recursive call.
+Then backtrack by removing the last added element.
+Make another recursive call by excluding the current element.
+When the index reaches the length of the array, add a copy of the current subset to the result list.
+Complexity
+Time complexity: O(n * 2^n) — There are 2^n possible subsets, and copying each subset takes O(n) time.
+Space complexity: O(n) — For the recursion stack and temporary subset, excluding the space used to store the result.
+Code
+class Solution {
+    List<List<Integer>> ans = new ArrayList<>();
+
+    public List<List<Integer>> subsets(int[] nums) {
+        List<Integer> temp = new ArrayList<>();
+        findsubsets(nums, temp, 0);
+        return ans;
+    }
+
+    public void findsubsets(int nums[], List<Integer> temp, int i) {
+        if (i == nums.length) {
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+        temp.add(nums[i]);
+        findsubsets(nums, temp, i + 1);
+        temp.remove(temp.size() - 1);
+        findsubsets(nums, temp, i + 1);
+    }
+}
