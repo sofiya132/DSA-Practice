@@ -1,0 +1,89 @@
+https://leetcode.com/problems/n-queens-ii/solutions/8618327/n-queens-ii-backtracking-with-row-wise-s-nvyb
+
+Intuition
+We need to place N queens on an N × N chessboard such that no two queens attack each other.
+
+Since queens can attack horizontally, vertically, and diagonally, we need to ensure that every queen is placed in a safe position.
+
+We can solve this using backtracking by placing one queen in each row and exploring all possible column positions.
+
+Approach
+Initialize an N × N board with '.' representing empty cells.
+Start placing queens from the first row.
+For each row, try placing a queen in every column.
+Before placing a queen, check whether the position is safe using the isSafe() method.
+Check the column above.
+Check the upper-right diagonal.
+Check the upper-left diagonal.
+If the position is safe:
+Place the queen ('Q').
+Recursively move to the next row.
+Backtrack by removing the queen ('.') after the recursive call.
+If all N rows are successfully filled, increment the count.
+Return the total number of valid arrangements.
+Since we are filling the board from top to bottom, we only need to check the upper column and upper diagonals.
+
+Complexity
+Time complexity: (O(N! \times N)) — We explore possible queen placements row by row. Each safety check takes (O(N)) time.
+Space complexity: (O(N^2)) — For the N × N board, with an additional (O(N)) recursion stack.
+Code
+class Solution {
+    static int count = 0;
+
+    public int totalNQueens(int n) {
+        count = 0;
+        char[][] board = new char[n][n];
+
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(board[i], '.');
+        }
+
+        helper(board, 0);
+        return count;
+    }
+
+    public void helper(char[][] board, int row) {
+        if (row == board.length) {
+            count++;
+            return;
+        }
+
+        for (int j = 0; j < board.length; j++) {
+            if (isSafe(board, row, j)) {
+                board[row][j] = 'Q';
+
+                helper(board, row + 1);
+
+                board[row][j] = '.';
+            }
+        }
+    }
+
+    public static boolean isSafe(char[][] board, int row, int col) {
+
+        // Check upper column
+        for (int i = row - 1; i >= 0; i--) {
+            if (board[i][col] == 'Q') {
+                return false;
+            }
+        }
+
+        // Check upper-right diagonal
+        for (int i = row - 1, j = col + 1;
+             i >= 0 && j < board.length; i--, j++) {
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        // Check upper-left diagonal
+        for (int i = row - 1, j = col - 1;
+             i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
